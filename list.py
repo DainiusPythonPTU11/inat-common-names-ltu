@@ -1,7 +1,6 @@
-import glob, zipfile, pandas
+import os, glob, zipfile, pandas
 
-# dir_path = 'C:\\Users\CodeAcademy\Desktop\inat-common-names-ltu\Files'
-dir_path = 'D:\\Python\PycharmProjects\inat-common-names-ltu\Files'
+dir_path = f'{os.getcwd()}\Files'
 
 for i in glob.glob((f'{dir_path}\\*.zip')): zipfile.ZipFile(i).extractall(dir_path)
 
