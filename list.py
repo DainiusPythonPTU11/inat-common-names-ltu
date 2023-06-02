@@ -1,7 +1,6 @@
 import os, glob, zipfile, pandas
 
 dir_path = f'{os.getcwd()}\Files'
-print(dir_path)
 
 for i in glob.glob((f'{dir_path}\\*.zip')): zipfile.ZipFile(i).extractall(dir_path)
 
