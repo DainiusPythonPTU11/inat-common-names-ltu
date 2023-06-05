@@ -30,11 +30,11 @@ latest_datetime = str(pd.to_datetime(max(df['created_at'])))[:19].replace(':', '
 
 df = df.drop(columns=['created_at'])
 
-taxon_count = df.value_counts('taxon_id').to_frame()
+taxon_id_count = df.value_counts('taxon_id').to_frame()
 
 df = df.drop_duplicates()
 
 df['common_name'] = df['common_name'].str.capitalize()
 
-taxon_count.join(df.set_index('taxon_id'), on='taxon_id').sort_values(by='scientific_name').to_excel(
+taxon_id_count.join(df.set_index('taxon_id'), on='taxon_id').sort_values(by='scientific_name').to_excel(
     f'{dir_path}\\Results\\observations-{latest_file} {latest_datetime}.xlsx', sheet_name=f'iNaturalist{latest_file}')
