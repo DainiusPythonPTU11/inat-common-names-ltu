@@ -36,5 +36,5 @@ df = df.drop_duplicates()
 
 df['common_name'] = df['common_name'].str.capitalize()
 
-taxon_id_count.join(df.set_index('taxon_id'), on='taxon_id').sort_values(by='scientific_name').to_excel(
-    f'{dir_path}\\Results\\observations-{latest_file} {latest_datetime}.xlsx', sheet_name=f'iNaturalist{latest_file}')
+taxon_id_count.join(df.set_index('taxon_id'), on='taxon_id').sort_values(by='scientific_name').to_csv(
+    f'{dir_path}\\Results\\observations-{latest_file} {latest_datetime}.csv')
