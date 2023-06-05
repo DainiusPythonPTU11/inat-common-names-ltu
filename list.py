@@ -22,9 +22,9 @@ df = df.convert_dtypes().reset_index(drop=True)
 df['created_at'] = pd.to_datetime(df['created_at'], utc=True)
 
 print('\n', '       Paskutinio stebėjimo laikas:', pd.to_datetime(max(df['created_at'])))
-data = input('Neįtraukti duomenų nuo (YYYY-MM-DD): ') + ' 00:00:00+00:00'
+ignore_datetime = input('Neįtraukti duomenų nuo (YYYY-MM-DD): ') + ' 00:00:00+00:00'
 
-df = df[df.created_at < data]
+df = df[df.created_at < ignore_datetime]
 
 latest_datetime = str(pd.to_datetime(max(df['created_at'])))[:19].replace(':', '_') + ' UTC'
 
