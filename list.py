@@ -19,14 +19,14 @@ for i in glob(f'{dir_path}\\observations-*.csv'):
 
 df = df.convert_dtypes().reset_index(drop=True)
 
-print('\n', '       Paskutinio stebėjimo laikas:', pd.to_datetime(max(df['created_at']), utc=True))
-data = input('Neįtraukti duomenų nuo (YYYY-MM-DD): ') + ' 00:00:00+00:00'
-
 df['created_at'] = pd.to_datetime(df['created_at'], utc=True)
+
+print('\n', '       Paskutinio stebėjimo laikas:', pd.to_datetime(max(df['created_at'])))
+data = input('Neįtraukti duomenų nuo (YYYY-MM-DD): ') + ' 00:00:00+00:00'
 
 df = df[df.created_at < data]
 
-latest_datetime = str(pd.to_datetime(max(df['created_at']), utc=True))[:19].replace(':', '_') + ' UTC'
+latest_datetime = str(pd.to_datetime(max(df['created_at'])))[:19].replace(':', '_') + ' UTC'
 
 df = df.drop(columns=['created_at'])
 
