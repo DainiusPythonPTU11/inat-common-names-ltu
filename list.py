@@ -2,6 +2,9 @@ from os import getcwd
 from glob import glob
 from zipfile import ZipFile
 import pandas as pd
+from datetime import datetime
+
+time1 = datetime.now()
 
 dir_path = f'{getcwd()}\\Files'
 
@@ -21,8 +24,12 @@ df = df.convert_dtypes().reset_index(drop=True)
 
 df['created_at'] = pd.to_datetime(df['created_at'], utc=True)
 
+time2 = datetime.now()
+
 print('\n', '       Paskutinio stebėjimo laikas:', pd.to_datetime(max(df['created_at'])))
 ignore_datetime = input('Neįtraukti duomenų nuo (YYYY-MM-DD): ') + ' 00:00:00+00:00'
+
+time3 = datetime.now()
 
 df = df[df.created_at < ignore_datetime]
 
@@ -38,3 +45,11 @@ df['common_name'] = df['common_name'].str.capitalize()
 
 taxon_id_count.join(df.set_index('taxon_id'), on='taxon_id').sort_values(by='scientific_name').to_excel(
     f'{dir_path}\\Results\\observations-{latest_file} {latest_datetime}.xlsx', sheet_name=f'iNaturalist{latest_file}')
+
+time4 = datetime.now()
+
+d1 = time2 - time1
+d2 = time4 - time3
+d3 = d1 + d2
+
+print(d1.seconds, d2.seconds, d3.seconds)
