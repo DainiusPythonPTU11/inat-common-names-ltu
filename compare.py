@@ -6,22 +6,19 @@ dir_path = f'{getcwd()}\\Files\\Results'
 
 csv_files_list = glob(f'{dir_path}\\observations-*.csv')
 
-df_old = pd.read_csv(csv_files_list[0], encoding='UTF-8')
-df_new = pd.read_csv(csv_files_list[1], encoding='UTF-8')
+old = pd.read_csv(csv_files_list[0], encoding='UTF-8').convert_dtypes()
+new = pd.read_csv(csv_files_list[1], encoding='UTF-8').convert_dtypes()
 
-df_old = df_old.convert_dtypes()
-df_new = df_new.convert_dtypes()
+old['catena'] = old['scientific_name'].astype(str) + old['common_name'].astype(str)
+new['catena'] = new['scientific_name'].astype(str) + new['common_name'].astype(str)
 
-df_old['catena'] = df_old['scientific_name'].astype(str) + df_old['common_name'].astype(str)
-df_new['catena'] = df_new['scientific_name'].astype(str) + df_new['common_name'].astype(str)
+old = old.iloc[:, [27, 0, 1, 2, 3]]
+new = new.iloc[:, [27, 0, 1, 2, 3]]
 
-df_old = df_old.iloc[:, [27, 0, 1, 2, 3]]
-df_new = df_new.iloc[:, [27, 0, 1, 2, 3]]
-
-df_old.to_csv(f'{dir_path}\\Old.csv')
-df_new.to_csv(f'{dir_path}\\New.csv')
-
-df = pd.merge(df_old, df_new, how='outer', on='catena')
+df = pd.merge(old, new, how='outer', on='catena', suffixes=('_old', '_new'))
 print(df.head())
 
-df.to_csv(f'{dir_path}\\Catena.csv')
+old_filename = csv_files_list[0][csv_files_list[0].find('observations-') + 13:csv_files_list[0].find('.csv')-24]
+new_filename = csv_files_list[1][csv_files_list[1].find('observations-') + 13:csv_files_list[1].find('.csv')-24]
+
+df.to_csv(f'{dir_path}\\Pakeitimai {old_filename}-{new_filename}.csv')
