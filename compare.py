@@ -16,7 +16,6 @@ old = old.iloc[:, [27, 0, 1, 2, 3]]
 new = new.iloc[:, [27, 0, 1, 2, 3]]
 
 df = pd.merge(old, new, how='outer', on='catena', suffixes=('_old', '_new'))
-print(df.head())
 
 old_filename = csv_files_list[0][csv_files_list[0].find('observations-') + 13:csv_files_list[0].find('.csv')-24]
 new_filename = csv_files_list[1][csv_files_list[1].find('observations-') + 13:csv_files_list[1].find('.csv')-24]
