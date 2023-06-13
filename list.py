@@ -19,6 +19,8 @@ for i in glob(f'{dir_path}\\observations-*.csv'):
 
 df = df.convert_dtypes().reset_index(drop=True)
 
+print(df.info())
+
 df['created_at'] = pd.to_datetime(df['created_at'], utc=True)
 
 print('\n', '       Paskutinio stebėjimo laikas:', pd.to_datetime(max(df['created_at'])))
