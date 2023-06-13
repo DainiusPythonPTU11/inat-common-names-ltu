@@ -2,6 +2,8 @@ from os import getcwd
 from glob import glob
 import pandas as pd
 
+# kodą paleiskite, kai aplanke Results turėsite du skirtingus .csv failus.
+
 dir_path = f'{getcwd()}\\Files\\Results'
 
 csv_files_list = glob(f'{dir_path}\\observations-*.csv')
