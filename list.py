@@ -3,7 +3,7 @@ from glob import glob
 from zipfile import ZipFile
 import pandas as pd
 
-# .zip failus nukopijuokite į aplanką Files. Rezultatas atsidurs aplanke Results.
+# Du .zip failus iš aplanko Duomenys pasibandymui nukopijuokite į aplanką Files. Rezultatą rasite aplanke Results.
 
 dir_path = f'{getcwd()}\\Files'
 
